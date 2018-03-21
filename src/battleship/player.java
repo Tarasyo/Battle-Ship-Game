@@ -9,6 +9,7 @@ public class player {
 	private int[] age;
 	private String[] email;
 	private int[] points;
+	private int players;
 	
 	public player() {
 		
@@ -19,8 +20,8 @@ public class player {
 		
 		boolean valid = true;
 		//Loop for asking input until user entered number from 1 to 4
-		do {
 		
+		do {
 		// Reading input
 		Scanner in = new Scanner(System.in);
 		String nPlayers = in.nextLine();
@@ -28,6 +29,7 @@ public class player {
 		//if number in nPlayers mathces from 1 to 4 everithing is goood
 		if(nPlayers.matches("[1-4]")) {
 			valid=true;
+			players = Integer.valueOf(nPlayers);
 		}else {
 			valid=false;
 			System.out.println("*****ERROR*****");
@@ -35,6 +37,31 @@ public class player {
 		}
 		
 		}while(valid==false);
+		setArrays();
+	
 	}
+	
+	public void setArrays() {
+		
+		for(int i=0; i<=players-1;i++) {
+			
+			System.out.println("Please Enter full name of "+players+" player");
+			Scanner in = new Scanner(System.in);
+			String name = in.nextLine();
+			checkName(name);
+			
+		}
+	}
+	boolean checkName(String in) {
+		
+		if(in.contains(" ")) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+		
+	
 
 }
