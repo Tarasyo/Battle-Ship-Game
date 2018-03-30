@@ -1,33 +1,83 @@
 package battleship;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+//TARAS BOREYKO 
+//ID 2017284
 public class board {
-	//This array will be for drawing on screen board
-	private String DBoard[][] = new String[11][11];
-	//this is actual board where players will play and will check if hit target
-	private String PBoard[][] = new String[11][11];
+	private int hight;
+	private int width;
+	//This array for board
+	private String Board[][] = new String[21][21];
 	
 	public board() {
 		
-		
 	}
+	//method for get the size of board 
+	public void Size() {
+		boolean valid;
+		 
+		do {
+			
+		//Reade from user input for hight and width that we will use in future
+		System.out.println("Please Enter width of board");
+		Scanner in = new Scanner(System.in);
+		String width = in.nextLine();
+		 
+		 System.out.println("Please Enter hight of board");
+		String hight = in.nextLine();
+		
+		//check if input is numbers 
+		if(width.matches("[0-9]+") && hight.matches("[0-9]+")) {
+			
+			this.width = Integer.valueOf(width);
+			this.hight = Integer.valueOf(hight);
+			
+			//check if size will be from 10 to 20;
+			if((this.width>=10 && this.hight>=10) && (this.width<=20 && this.hight<=20)) {
+			valid = true;
+			}else { 
+			valid = false;
+			System.out.println("The size must be from 10 to 20, Please try again");
+			}
+			
+		}else {
+			valid = false;
+			System.out.println("Input must be just integer numbers, please try again");
+		}
+		}while(valid==false);
+	   
+		System.out.println(width+ " " + hight);
+	}
+	
 	//Setting first board that will be showing on  the beginning of the game
 	public void firstBoard() {
 		int i,j;
 		//in the coordinate 0 0 will be empty 
-		DBoard[0][0] = " ";
-		// this loop to write number coordinates on  0 row from 1 to 10 
+		Board[0][0] = " ";
+		// this loop to write number coordinates on  0 row from 1 to size of width 
 		for(j=1; j<11; j++) {
-			DBoard[0][j] = "  "+String.valueOf(j);
+			Board[0][j] = "  "+String.valueOf(j);
 		}
-		// this loop to write numbers of coordinates on 0 column from 1 to 10
+		
+		//loop to write numbers in coloms after 10, that board looks nice 
+		for(j=11; j<=width; j++)
+			Board[0][j] = " "+String.valueOf(j); 
+				
+		// this loop to write numbers of coordinates on 0 column from 1 to 9
 		for(i=1; i<10; i++) {
-			DBoard[i][0] = " "+String.valueOf(i)+"|";
+			Board[i][0] = " "+String.valueOf(i)+"|";
 		}
-		DBoard[10][0] = "10|"; //because I use just 10 on 10 board I write number 10 in row 10 separate to look better
+		
+		//loop to write numbers in row after 10, that board looks nice 
+		for(i=10; i<=hight; i++)
+		Board[i][0] = String.valueOf(i)+"|"; 
+		
 		//this double loop to write actual board 
-		for(i=1; i<11; i++) {
-			for(j=1; j<11; j++) {
-				DBoard[i][j] = "_ |";
+		for(i=1; i<=hight; i++) {
+			for(j=1; j<=width; j++) {
+				Board[i][j] = "_ |";
 			}
 		}
 	}
@@ -35,13 +85,16 @@ public class board {
 	public void printBoard() {
 		int i,j;
 		
-		for(i=0; i<11; i++) {
+		for(i=0; i<=hight; i++) {
 			
-			for(j=0; j<11; j++) {
-				System.out.print(DBoard[i][j]);
+			for(j=0; j<=width; j++) {
+				System.out.print(Board[i][j]);
 			}
-			System.out.println("");
+			System.out.println("");//start new row
 		}
 	}
 
+	public void ship() {
+		
+	}
 }
