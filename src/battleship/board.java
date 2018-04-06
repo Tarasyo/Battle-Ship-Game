@@ -1,19 +1,28 @@
 package battleship;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 //TARAS BOREYKO 
 //ID 2017284
-public class board {
+public class Board {
 	//I decide to write columns and rows not width and height
 	private int row;
 	private int col;
 	//This array for board
 	private String Board[][];
+	//some variables that we will use in future 
+	private boolean isVertical;
+	//for store the size of ship
+	private int sizeShip;
+	//array where the ship will be stored
+	private double[] ship;
+	//coordinates for first part of ship with which will work
+	private int x;
+	private int y;
 	
-	
-	public board() {
+	public Board() {
 		
 	}
 	//method for get the size of board 
@@ -50,7 +59,6 @@ public class board {
 		}
 		}while(valid==false);
 	   
-		System.out.println(col+ " " + row);
 	}
 	//Initialisation for size of Array and bring it to main
 	public String[][] getBoard() {
@@ -99,8 +107,58 @@ public class board {
 			System.out.println("");//start new row
 		}
 	}
-
-	public void ship() {
+	//In this method will be set parameters for ship
+	public void setParam() {
+		//this is size that divide width of board on 3 and round 
+		this.sizeShip = Math.round(col/3);
 		
+		//boolean for vertical if its true or false
+		this.isVertical = new Random().nextBoolean();
+		
+		//random generator for my coordinates 
+		Random rand = new Random();
+		
+		//first random coordinates 
+		this.x = rand.nextInt(this.row) + 1;
+		this.y = rand.nextInt(this.col) + 1;
+		
+		System.out.println(x+" "+y+isVertical+sizeShip);
+	}
+	//Setting size of array that we need for ship
+	public double[] setSizeOfShip() {
+		return ship = new double[sizeShip];
+	}
+	//method to set the random place for ship
+	public void setShip() {
+		//if its vertical do this
+		if(isVertical) {
+			//if its enough space to + the size of the ship do +
+			if((x+sizeShip)<=row) {
+				for(int i=0; i<sizeShip; i++) {
+					this.ship[i] = Double.valueOf((x+i)+"."+y);
+				}
+			//if not, minus the size 
+			}else {
+				for(int i=0; i>((-1)*sizeShip); i--) {
+					this.ship[i] = Double.valueOf((x+i)+"."+y);
+				}
+			}
+			//If its not Vertical do horizontal
+		}else {
+			//if enough space for + do this
+			if((x+sizeShip)<=row) {
+				for(int i=0; i<sizeShip; i++) {
+					this.ship[i] = Double.valueOf(x+"."+(y+i));
+				}
+			//if not, minus the size 
+			}else {
+				for(int i=0; i>((-1)*sizeShip); i--) {
+					this.ship[i] = Double.valueOf(x+"."+(y+i));
+				}
+		}
+	}
+					for(int i=0; i<(sizeShip);i++){
+						System.out.println(ship[i]);
+					}
 	}
 }

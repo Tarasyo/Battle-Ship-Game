@@ -3,86 +3,59 @@ package battleship;
 //ID 2017284
 import java.util.Scanner;
 
-public class player {
+public class Player {
 	
-	//Creation of global arrays where all values will be writen 
-	private String[] name = new String[3];
-	private int[] age = new int[3];
-	private String[] email = new String[3];
-	private int[] points = new int[3];
-	private int players;
+	//Creation of globals where all values will be writen 
+	private String name;
+	private int age;
+	private String email;
+	private int points;
+
 	
-	public player() {
+	public Player() {
 		
-		System.out.println("Welcome");
-		System.out.println("Chuse hove many players will play");
-		System.out.println("MIN=1; MAX=4;");
-		System.out.println("Write plese number");
-		
-		boolean valid = true;
-		//Loop for asking input until user entered number from 1 to 4
-		
-		do {
-		// Reading input
-		Scanner in = new Scanner(System.in);
-		String nPlayers = in.nextLine();
-		
-		//if number in nPlayers matches from 1 to 4 everything is good
-		if(nPlayers.matches("[1-4]")) {
-			valid=true;
-			players = Integer.valueOf(nPlayers);
-		}else {
-			valid=false;
-			System.out.println("*****ERROR*****");
-			System.out.println("Please Enter number from 1 to 4");
-		}
-		
-		}while(valid==false);
-		Arrays();
 	
 	}
 	
-	public void Arrays() {
-		//create counter variable for loop, to don't change players variable
-		int counter = players;
+	
+	public void setInfo() {
 		
 		//loop for writing all players info one by one
-		for(int i=0; i<=counter-1;i++) {
 			boolean valid;
 			
 			//one more loop to check if name is right
-			System.out.println("Please Enter full name of "+(i+1)+" player");
+			System.out.println("Please Enter full name");
 			do {
 			Scanner in = new Scanner(System.in);
 			String nameIn = in.nextLine();
 			
 			//write the name in array if check returns true
-			if(checkName(nameIn)==true) {
+			if(checkName(nameIn)) {
 				valid=true;
-				this.name[i] = nameIn;
+				this.name = nameIn;
 			}else {
 				valid=false;
-				System.out.println("Please enter FULL name");
+				System.out.println("Please enter just letters and use full name");
 			}
 			}while(valid == false);
 			
 			//Do while loop for writing in age array and check if age is right
-			System.out.println("Please Enter Age of "+(i+1)+" player");
+			System.out.println("Please Enter Age");
 			do {
 				Scanner in = new Scanner(System.in);
 				String ageIn = in.nextLine();
 				
 				//write the age in array if check returns true
-				if(checkAge(ageIn)==true) {
+				if(checkAge(ageIn)) {
 					valid=true;
-					this.age[i] = Integer.valueOf(ageIn);
+					this.age = Integer.valueOf(ageIn);
 				}else {
 					valid=false;
 					System.out.println("Your age or input arent corect pls try again");
 				}
 				}while(valid == false);
                 
-                System.out.println("Please Enter Email addres of "+(i+1)+" player");
+                System.out.println("Please Enter Email addres");
     			do {
     				Scanner in = new Scanner(System.in);
     				String emailIn = in.nextLine();
@@ -90,7 +63,7 @@ public class player {
     				//write the age in array if check returns true
     				if(checkEmail(emailIn)==true) {
     					valid=true;
-    					this.email[i] = emailIn;
+    					this.email = emailIn;
     				}else {
     					valid=false;
     					System.out.println("Your email are incorect pls try again");
@@ -98,15 +71,17 @@ public class player {
     				}while(valid == false);
 		
 		}
-	}
-	//boolean method to check if in name have space
+	
+	//boolean method to check if in name have space and just letter's 
 	boolean checkName(String in) {
 		
 		if(in.contains(" ")) {
+		 if(in.matches("^[ A-Za-z]+$")) {
 			return true;
 		}else {
 			return false;
-		}
+		}}else {
+			return false;}
 		
 	}
 	
@@ -136,7 +111,20 @@ public class player {
 		return false;
 		}
 	}
-		
+	//Getters for variables 	
+	public String getName() {
+		return this.name;
+	}
+	public int getAge() {
+		return this.age;
+	}
+	public String gerEmail() {
+		return this.email;
+	}
+	public int getPoints() {
+		return this.points;
+	}
+
 	
 
 }
