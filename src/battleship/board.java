@@ -31,19 +31,19 @@ public class Board {
 		 
 		do {
 			
-		//Reade from user input for hight and width that we will use in future
+		//Reade from user input for height and width that we will use in future
 		System.out.println("Please Enter width of board");
 		Scanner in = new Scanner(System.in);
 		String width = in.nextLine();
 		 
 		 System.out.println("Please Enter hight of board");
-		String hight = in.nextLine();
+		String height = in.nextLine();
 		
 		//check if input is numbers 
-		if(width.matches("[0-9]+") && hight.matches("[0-9]+")) {
+		if(width.matches("[0-9]+") && height.matches("[0-9]+")) {
 		// Initialising rows and colum after check if input is numbers 
 			this.col = Integer.valueOf(width);
-			this.row = Integer.valueOf(hight);
+			this.row = Integer.valueOf(height);
 			
 			//check if size will be from 10 to 20;
 			if((this.col>=10 && this.row>=10) && (this.col<=20 && this.row<=20)) {
@@ -75,7 +75,7 @@ public class Board {
 			Board[0][j] = "  "+String.valueOf(j);
 		}
 		
-		//loop to write numbers in coloms after 10, that board looks nice 
+		//loop to write numbers in coloums after 10, that board looks nice 
 		for(j=10; j<=col; j++)
 			Board[0][j] = " "+String.valueOf(j); 
 				
@@ -122,7 +122,6 @@ public class Board {
 		this.x = rand.nextInt(this.row) + 1;
 		this.y = rand.nextInt(this.col) + 1;
 		
-		System.out.println(x+" "+y+isVertical+sizeShip);
 	}
 	//Setting size of array that we need for ship
 	public double[] setSizeOfShip() {
@@ -139,26 +138,57 @@ public class Board {
 				}
 			//if not, minus the size 
 			}else {
-				for(int i=0; i>((-1)*sizeShip); i--) {
-					this.ship[i] = Double.valueOf((x+i)+"."+y);
+				for(int i=0; i<sizeShip; i++) {
+					this.ship[i] = Double.valueOf((x-i)+"."+y);
 				}
 			}
 			//If its not Vertical do horizontal
 		}else {
 			//if enough space for + do this
-			if((x+sizeShip)<=row) {
+			if((y+sizeShip)<=col) {
 				for(int i=0; i<sizeShip; i++) {
 					this.ship[i] = Double.valueOf(x+"."+(y+i));
 				}
 			//if not, minus the size 
 			}else {
-				for(int i=0; i>((-1)*sizeShip); i--) {
-					this.ship[i] = Double.valueOf(x+"."+(y+i));
+				for(int i=0; i<sizeShip; i++) {
+					this.ship[i] = Double.valueOf(x+"."+(y-i));
 				}
 		}
 	}
-					for(int i=0; i<(sizeShip);i++){
-						System.out.println(ship[i]);
-					}
+}
+	
+	//few getters for main class that I will need; 
+	public int getRows() {
+		return this.row;
+	}
+	public int getColum() {
+		return this.col;
+	}
+	public int getSizeShip(){
+		return sizeShip;
+	}
+	//Method for check if the user hit the ship
+	public boolean chekHit(int j, double check) {
+		if(ship[j]==check) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	//Check if in this coordinates have line its mean that this coordinates wansn't hit yet and return true
+	public boolean checkSlot(int x, int y) {
+		if(Board[x][y].contains("_")) {
+		return true;
+		}else {
+		return false;
+		}
+	}
+	//This 2 setters for change the board for hits and misses 
+	public void setHitBoard(int x, int y) {
+		this.Board[x][y] = "X |";
+	}
+	public void setMissBoard(int x, int y) {
+		this.Board[x][y] = "O |";
 	}
 }

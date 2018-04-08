@@ -9,7 +9,8 @@ public class Player {
 	private String name;
 	private int age;
 	private String email;
-	private int points;
+	private int hits = 0;
+	private int miss = 0;
 
 	
 	public Player() {
@@ -29,7 +30,7 @@ public class Player {
 			Scanner in = new Scanner(System.in);
 			String nameIn = in.nextLine();
 			
-			//write the name in array if check returns true
+			//initialised the name if check returns true
 			if(checkName(nameIn)) {
 				valid=true;
 				this.name = nameIn;
@@ -39,13 +40,13 @@ public class Player {
 			}
 			}while(valid == false);
 			
-			//Do while loop for writing in age array and check if age is right
+			//Do while loop for initialising the age and check if age is right
 			System.out.println("Please Enter Age");
 			do {
 				Scanner in = new Scanner(System.in);
 				String ageIn = in.nextLine();
 				
-				//write the age in array if check returns true
+				//initialised the age if check returns true
 				if(checkAge(ageIn)) {
 					valid=true;
 					this.age = Integer.valueOf(ageIn);
@@ -60,7 +61,7 @@ public class Player {
     				Scanner in = new Scanner(System.in);
     				String emailIn = in.nextLine();
     				
-    				//write the age in array if check returns true
+    				//initialised the age if check returns true
     				if(checkEmail(emailIn)==true) {
     					valid=true;
     					this.email = emailIn;
@@ -111,7 +112,7 @@ public class Player {
 		return false;
 		}
 	}
-	//Getters for variables 	
+	//Getters for variables for array list 	
 	public String getName() {
 		return this.name;
 	}
@@ -122,9 +123,18 @@ public class Player {
 		return this.email;
 	}
 	public int getPoints() {
-		return this.points;
+		return this.hits;
 	}
-
-	
+	public int getMiss() {
+		return this.miss;
+	}
+	//if player hit ship + 1 to hits
+    public void plusHits(){
+        this.hits += 1;
+    }
+    //if player doesn't hit ship + 1 to miss
+    public void plusMiss(){
+        this.miss += 1;
+    }
 
 }
